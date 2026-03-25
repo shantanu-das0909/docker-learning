@@ -8,6 +8,9 @@ RUN npm install
 
 COPY . .
 
+ENV MONGODB_USERNAME=max
+ENV MONGODB_PASSWORD=secret
+
 EXPOSE 80
 
 CMD [ "npm", "start" ]

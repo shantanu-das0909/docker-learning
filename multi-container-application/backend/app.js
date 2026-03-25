@@ -83,11 +83,11 @@ app.delete("/goals/:id", async (req, res) => {
   }
 });
 
-// docker run --name mongod -v data:/data/db --rm -d --network goals-net mongo
+// docker run --name mongod -e MONGO_INITDB_ROOT_USERNAME=max -e MONGO_INITDB_ROOT_PASSWORD=secret -v datadb:/data/db --rm -d --network goals-net mongo
 // docker run --name goals-backend -v /Users/shantanu/Developer/Docker/multi-container-application/backend:/app -v logs:/app/logs -v /app/node_modules --rm -p 80:80 --network goals-net goals-node
 // docker run --name goals-frontend -v /Users/shantanu/Developer/Docker/multi-container-application/frontend/src:/app/src --rm -it -p 3000:3000 goals-react
 mongoose.connect(
-  "mongodb://mongod:27017/course-goals?authSource=admin",
+  `mongodb://${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}@mongodb:27017/course-goals?authSource=admin`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
